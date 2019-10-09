@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Accueil
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-app>
+    <ion-header translucent>
+    </ion-header>,
+    <ion-content fullscreen>
+      <ion-card>
+        <img
+          src="https://resize-europe1.lanmedia.fr/r/622,311,forcex,center-middle/img/var/europe1/storage/images/europe1/sciences/la-nasa-devoile-une-photo-inedite-de-la-terre-1369584/21301280-1-fre-FR/La-Nasa-devoile-une-photo-inedite-de-la-Terre.jpg" />
+        <ion-card-header>
+
+          <ion-card-title class="ion-text-center">Conférence</ion-card-title>
+          <ion-card-subtitle class="ion-text-center"> {{dateDebut | date:'dd/MM/yyyy'}} -
+            {{dateFin | date:'dd/MM/yyyy'}} </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-toolbar>
+            <ion-buttons slot="primary">
+              <ion-button>Voir les sessions</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+          <ion-toolbar>
+            <ion-buttons slot="primary">
+              <ion-button>Voir les présentateurs</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-card-content>
+      </ion-card>
+    </ion-content>
+  </ion-app>
+
+</ion-content>
