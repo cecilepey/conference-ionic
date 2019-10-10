@@ -14,7 +14,10 @@ const routes: Routes = [
   {
     path: 'sessions',
     loadChildren: () => import('./sessions/sessions.module').then(m => m.SessionsPageModule)
-  }
+  },
+  { path: 'presentateurs', loadChildren: './presentateurs/presentateurs.module#PresentateursPageModule' },
+  { path: 'sessions/:id', loadChildren: './session/session.module#SessionPageModule' },
+  { path: 'presentateurs/:id', loadChildren: './presentateur/presentateur.module#PresentateurPageModule' }
 ];
 
 @NgModule({

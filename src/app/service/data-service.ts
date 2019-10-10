@@ -17,7 +17,12 @@ export class DataService {
     constructor(private http: HttpClient) { }
 
 
-
+    /**
+     *méthode qui  permet de récupérer les informations de la conférence
+     *
+     * @returns {Observable<infosConference[]>}
+     * @memberof DataService
+     */
     recupererInfosConference(): Observable<infosConference[]> {
         const httpOptions = {
             headers: new HttpHeaders({
@@ -29,6 +34,12 @@ export class DataService {
         return this.http.get<infosConference[]>(`${URL}/schedule`, httpOptions);
     }
 
+    /**
+     *méthode qui permet de récupérer les infos des sessions
+     *
+     * @returns {Observable<infosSessions>}
+     * @memberof DataService
+     */
     recupererInfosSessions(): Observable<infosSessions> {
         const httpOptions = {
             headers: new HttpHeaders({
@@ -41,6 +52,12 @@ export class DataService {
 
     }
 
+    /**
+     *méthode qui permet de récupérer les infos des speakers
+     *
+     * @returns {Observable<speakers>}
+     * @memberof DataService
+     */
     recupererInfosSpeakers(): Observable<speakers> {
         const httpOptions = {
             headers: new HttpHeaders({

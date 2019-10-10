@@ -1,0 +1,36 @@
+<ion-toolbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-button size="small" routerLink="/presentateurs">Retour</ion-button>
+    </ion-buttons>
+    <ion-title>
+      Présentateur
+    </ion-title>
+  </ion-toolbar>
+</ion-toolbar>
+
+<ion-content>
+  <ion-card>
+    <ion-card-title class="ion-text-center">{{speaker.name}}</ion-card-title>
+    <ion-card-content>
+      <img src="{{speaker.photoUrl}}">
+      <ion-toolbar>{{speaker.shortBio}}</ion-toolbar>
+      <ion-toolbar>
+        <ion-list>
+          <ion-list-header>
+            Présentations
+          </ion-list-header>
+
+          <ion-item *ngFor="let session of listeSessionSpeaker">
+            <ion-label>
+              <a routerLink="/sessions/{{session.id}}">{{session.title}}</a>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-toolbar>
+
+    </ion-card-content>
+
+  </ion-card>
+</ion-content>
