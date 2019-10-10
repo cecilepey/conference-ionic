@@ -22,10 +22,6 @@ export class AppComponent {
     {
       title: 'Présentateurs',
       url: '/presentateurs'
-    },
-    {
-      title: 'Mes Notes',
-      url: '/notes'
     }
   ];
 

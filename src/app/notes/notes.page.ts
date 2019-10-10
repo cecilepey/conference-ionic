@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { DataService } from '../service/data-service';
 import { infosSessions } from '../entities/infosSessions';
+import { note } from '../entities/note';
 
 @Component({
   selector: 'app-notes',
@@ -13,7 +14,9 @@ export class NotesPage implements OnInit {
   id: string;
   listeSession: infosSessions[] = [];
 
-  session = new infosSessions(null, '', '', '', [])
+  session = new infosSessions(null, '', '', '', []);
+
+  note = new note(null, '');
 
   constructor(private route: ActivatedRoute, private dataService: DataService) {
     this.id = route.snapshot.paramMap.get("id");
@@ -45,12 +48,25 @@ export class NotesPage implements OnInit {
 
     this.listeSession.forEach(
       result => {
-        const id = parseInt(this.id)
+        const id = parseInt(this.id, 10);
         if (id === result.id) {
           this.session = result;
+          if (localStorage.getItem(`${this.session.id}`) != null) {
+            this.note.contenu = localStorage.getItem(`${this.session.id}`)
+          } else {
+            this.note.contenu = 'Saisissez vos notes...'
+          }
         }
       }
     );
+
+
+  }
+
+  enregistrerNotes(note: note) {
+    this.note.contenu = note.contenu;
+    this.note.idSession = parseInt(this.id, 10);
+    localStorage.setItem(`${this.note.idSession}`, this.note.contenu)
   }
 
 }

@@ -6,6 +6,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
+      <ion-button size="small" routerLink="/sessions/{{session.id}}">Retour</ion-button>
     </ion-buttons>
     <ion-title>
       Mes Notes
@@ -20,10 +21,11 @@
   </ion-toolbar>
   <ion-item>
     <ion-label position="stacked">Notes</ion-label>
-    <ion-textarea autoGrow required></ion-textarea>
+    <ion-textarea autoGrow required *ngIf="note.contenu != null" name="contenu" #contenu="ngModel"
+      [(ngModel)]="note.contenu" placeholder="note.contenu"></ion-textarea>
   </ion-item>
   <ion-toolbar>
-    <ion-button expand="block">Enregistrer</ion-button>
+    <ion-button expand="block" (click)="enregistrerNotes(note)">Enregistrer</ion-button>
   </ion-toolbar>
 
 
