@@ -12,9 +12,9 @@
 
 <ion-content fullscreen>
   <ion-card>
-    <ion-card-title class="ion-text-center">{{session.title}}</ion-card-title>
+    <ion-card-title class="ion-text-center ion-padding-top">{{session.title}}</ion-card-title>
     <ion-card-content>
-      <ion-toolbar>{{session.description}}</ion-toolbar>
+      <ion-toolbar class="ion-padding-bottom">{{session.description}}</ion-toolbar>
       <ion-toolbar *ngFor="let speakers of listeSpeakersSession">
 
         <ion-item routerLink="/presentateurs/{{speakers.id}}">
@@ -26,7 +26,7 @@
           </ion-label>
         </ion-item>
       </ion-toolbar>
-      <ion-toolbar>
+      <ion-toolbar class="ion-padding-top">
         <ion-button expand="block" routerLink="/notes/{{session.id}}">Mes notes</ion-button>
       </ion-toolbar>
 

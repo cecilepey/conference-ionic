@@ -4,6 +4,7 @@ import { InfosSessions } from '../entities/infosSessions';
 import { Speakers } from '../entities/speakers';
 import { DataService } from '../service/data-service';
 
+
 @Component({
   selector: 'app-session',
   templateUrl: './session.page.html',
@@ -44,7 +45,7 @@ export class SessionPage implements OnInit {
     this.listeSession.forEach(
       result => {
         const id = parseInt(this.id, 10);
-        if (id == result.id) {
+        if (id === result.id) {
           this.session = result;
           this.listeSpeakersSession = []
           if (this.session.speakers != null) {
@@ -52,7 +53,8 @@ export class SessionPage implements OnInit {
               intervenant => {
                 this.listeSpeakers.forEach(
                   resultat => {
-                    if (intervenant == resultat.id) {
+                    const resultatId = parseInt(resultat.id, 10)
+                    if (intervenant === resultatId) {
                       resultat.photoUrl = 'https://devfest2018.gdgnantes.com/' + resultat.photoUrl;
                       this.listeSpeakersSession.push(resultat)
                     }

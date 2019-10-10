@@ -15,18 +15,28 @@
 </ion-header>
 
 <ion-content fullscreen>
+  <ion-card>
 
-  <ion-toolbar>
-    <ion-title size="small">{{session.title}}</ion-title>
-  </ion-toolbar>
-  <ion-item>
-    <ion-label position="stacked">Notes</ion-label>
-    <ion-textarea autoGrow required *ngIf="note.contenu != null" name="contenu" #contenu="ngModel"
-      [(ngModel)]="note.contenu" placeholder="note.contenu"></ion-textarea>
-  </ion-item>
-  <ion-toolbar>
-    <ion-button expand="block" (click)="enregistrerNotes(note)">Enregistrer</ion-button>
-  </ion-toolbar>
+
+    <ion-card-title class="ion-text-center">{{session.title}}</ion-card-title>
+
+    <ion-card-content>
+
+      <ion-item>
+        <ion-card-subtitle color="dark">Notes</ion-card-subtitle>
+      </ion-item>
+      <ion-item>
+        <ion-textarea rows="10" required *ngIf="note.contenu != null" name="contenu" #contenu="ngModel"
+          [(ngModel)]="note.contenu" placeholder="note.contenu"></ion-textarea>
+      </ion-item>
+      <ion-toolbar>
+        <ion-button expand="block" (click)="enregistrerNotes(note)">Enregistrer</ion-button>
+      </ion-toolbar>
+
+    </ion-card-content>
+  </ion-card>
+
+
 
 
 </ion-content>

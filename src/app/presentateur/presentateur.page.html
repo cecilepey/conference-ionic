@@ -12,14 +12,14 @@
 
 <ion-content>
   <ion-card>
-    <ion-card-title class="ion-text-center">{{speaker.name}}</ion-card-title>
+    <ion-card-title class="ion-text-center ion-padding-top">{{speaker.name}}</ion-card-title>
     <ion-card-content>
-      <img src="{{speaker.photoUrl}}">
-      <ion-toolbar>{{speaker.shortBio}}</ion-toolbar>
+      <img src="{{speaker.photoUrl}}" class="ion-padding-bottom">
+      <ion-toolbar class="ion-padding-bottom">{{speaker.shortBio}}</ion-toolbar>
       <ion-toolbar>
         <ion-list>
           <ion-list-header>
-            Présentations
+            <h2 color="dark" class="ion-text-left">Ses présentations</h2>
           </ion-list-header>
 
           <ion-item *ngFor="let session of listeSessionSpeaker">
