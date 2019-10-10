@@ -68,7 +68,7 @@ export class PresentateurPage implements OnInit {
     this.listeSpeakers.forEach(
       intervenant => {
         const id = parseInt(this.id);
-        if (intervenant.id == id) {
+        if (intervenant.id === id) {
           intervenant.photoUrl = `https://devfest2018.gdgnantes.com/${intervenant.photoUrl}`
           this.speaker = intervenant;
           this.listeSessionSpeaker = [];
@@ -77,7 +77,7 @@ export class PresentateurPage implements OnInit {
               if (session.speakers != null) {
                 session.speakers.forEach(
                   result => {
-                    if (result == id) {
+                    if (result === id) {
                       if (session.titleMobile != null) {
                         session.title = session.titleMobile;
                       }

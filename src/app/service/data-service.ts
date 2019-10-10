@@ -69,4 +69,5 @@ export class DataService {
         return this.http.get<speakers>(`${URL}/speakers`, httpOptions);
 
     }
+
 }
