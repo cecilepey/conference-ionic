@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../service/data-service';
-import { speakers } from '../entities/speakers';
-import { infosSessions } from '../entities/infosSessions';
+import { Speakers } from '../entities/speakers';
+import { InfosSessions } from '../entities/infosSessions';
 
 @Component({
   selector: 'app-presentateurs',
@@ -10,48 +10,24 @@ import { infosSessions } from '../entities/infosSessions';
 })
 export class PresentateursPage implements OnInit {
 
-  listeSpeakers: speakers[] = [];
-  speaker = new speakers(null, '', '', '');
+  listeSpeakers: Speakers[] = [];
 
-  listeSession: infosSessions[] = [];
+  listeSession: InfosSessions[] = [];
 
-  listeSessionSpeaker: infosSessions[] = [];
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    if (localStorage.getItem('speaker') === null) {
-      this.dataService.recupererInfosSpeakers()
-        .subscribe(
-          info => {
-            Object.values(info).forEach(
-              result => {
-                this.listeSpeakers.push(result)
-              }
-            );
-            localStorage.setItem('speaker', JSON.stringify(this.listeSpeakers));
-          }
-        )
-    } else {
-      this.listeSpeakers = JSON.parse(localStorage.getItem('speaker'));
-    }
 
-    if (localStorage.getItem('session') === null) {
-      this.dataService.recupererInfosSessions()
-        .subscribe(
-          info => {
-            Object.values(info).forEach(
-              result => {
-                this.listeSession.push(result)
+    this.dataService.recupererInfosSessions()
+      .subscribe(
+        result => { this.listeSession = result; }
+      );
 
-              }
-            );
-            localStorage.setItem('session', JSON.stringify(this.listeSession));
-          }
-        )
-    } else {
-      this.listeSession = JSON.parse(localStorage.getItem('session'));
-    }
+    this.dataService.recupererInfosSpeakers()
+      .subscribe(
+        result => { this.listeSpeakers = result; }
+      );
+
   }
-
 }

@@ -4,7 +4,8 @@
  * @export
  * @class infosSessions
  */
-export class infosSessions {
+export class InfosSessions {
 
-    constructor(public id: number, public title: string, public titleMobile: string, public description: string, public speakers: number[]) { }
+    constructor(public id: number, public title: string, public titleMobile: string,
+        public description: string, public speakers: number[]) { }
 } 

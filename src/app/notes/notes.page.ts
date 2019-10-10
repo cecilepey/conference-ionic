@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { DataService } from '../service/data-service';
-import { infosSessions } from '../entities/infosSessions';
-import { note } from '../entities/note';
+import { InfosSessions } from '../entities/infosSessions';
+import { Note } from '../entities/note';
 
 @Component({
   selector: 'app-notes',
@@ -12,11 +12,11 @@ import { note } from '../entities/note';
 export class NotesPage implements OnInit {
 
   id: string;
-  listeSession: infosSessions[] = [];
+  listeSession: InfosSessions[] = [];
 
-  session = new infosSessions(null, '', '', '', []);
+  session = new InfosSessions(null, '', '', '', []);
 
-  note = new note(null, '');
+  note = new Note(null, '');
 
   constructor(private route: ActivatedRoute, private dataService: DataService) {
     this.id = route.snapshot.paramMap.get("id");
@@ -27,24 +27,12 @@ export class NotesPage implements OnInit {
 
       this.id = params.get('id');
 
-    });
-
-    if (localStorage.getItem('session') === null) {
       this.dataService.recupererInfosSessions()
         .subscribe(
-          info => {
-            Object.values(info).forEach(
-              result => {
-                this.listeSession.push(result)
+          result => { this.listeSession = result; }
+        );
 
-              }
-            );
-            localStorage.setItem('session', JSON.stringify(this.listeSession));
-          }
-        )
-    } else {
-      this.listeSession = JSON.parse(localStorage.getItem('session'));
-    }
+    });
 
     this.listeSession.forEach(
       result => {
@@ -54,7 +42,7 @@ export class NotesPage implements OnInit {
           if (localStorage.getItem(`${this.session.id}`) != null) {
             this.note.contenu = localStorage.getItem(`${this.session.id}`)
           } else {
-            this.note.contenu = 'Saisissez vos notes...'
+            this.note.contenu = 'Saisissez vos notes...';
           }
         }
       }
@@ -63,10 +51,10 @@ export class NotesPage implements OnInit {
 
   }
 
-  enregistrerNotes(note: note) {
-    this.note.contenu = note.contenu;
+  enregistrerNotes(noteSaisie: Note) {
+    this.note.contenu = noteSaisie.contenu;
     this.note.idSession = parseInt(this.id, 10);
-    localStorage.setItem(`${this.note.idSession}`, this.note.contenu)
+    localStorage.setItem(`${this.note.idSession}`, this.note.contenu);
   }
 
 }

@@ -4,7 +4,7 @@
  * @export
  * @class infosConference
  */
-export class infosConference {
+export class InfosConference {
 
     constructor(public date: string, public dateReadable: string) { }
 } 

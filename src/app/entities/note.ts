@@ -4,7 +4,7 @@
  * @export
  * @class speakers
  */
-export class note {
+export class Note {
 
     constructor(public idSession: number, public contenu: string) { }
 } 

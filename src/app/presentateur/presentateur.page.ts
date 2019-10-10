@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { speakers } from '../entities/speakers';
-import { infosSessions } from '../entities/infosSessions';
+import { Speakers } from '../entities/speakers';
+import { InfosSessions } from '../entities/infosSessions';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { DataService } from '../service/data-service';
 
@@ -13,12 +13,12 @@ export class PresentateurPage implements OnInit {
 
   id: string;
 
-  listeSpeakers: speakers[] = [];
-  speaker = new speakers(null, '', '', '');
+  listeSpeakers: Speakers[] = [];
+  speaker = new Speakers(null, '', '', '');
 
-  listeSession: infosSessions[] = [];
+  listeSession: InfosSessions[] = [];
 
-  listeSessionSpeaker: infosSessions[] = [];
+  listeSessionSpeaker: InfosSessions[] = [];
 
   constructor(private route: ActivatedRoute, private dataService: DataService) {
     this.id = route.snapshot.paramMap.get("id");
@@ -30,40 +30,17 @@ export class PresentateurPage implements OnInit {
 
       this.id = params.get('id');
 
-    });
-
-    if (localStorage.getItem('speaker') === null) {
-      this.dataService.recupererInfosSpeakers()
-        .subscribe(
-          info => {
-            Object.values(info).forEach(
-              result => {
-                this.listeSpeakers.push(result)
-              }
-            );
-            localStorage.setItem('speaker', JSON.stringify(this.listeSpeakers));
-          }
-        )
-    } else {
-      this.listeSpeakers = JSON.parse(localStorage.getItem('speaker'));
-    }
-
-    if (localStorage.getItem('session') === null) {
       this.dataService.recupererInfosSessions()
         .subscribe(
-          info => {
-            Object.values(info).forEach(
-              result => {
-                this.listeSession.push(result)
+          result => { this.listeSession = result; }
+        );
 
-              }
-            );
-            localStorage.setItem('session', JSON.stringify(this.listeSession));
-          }
-        )
-    } else {
-      this.listeSession = JSON.parse(localStorage.getItem('session'));
-    }
+      this.dataService.recupererInfosSpeakers()
+        .subscribe(
+          result => { this.listeSpeakers = result; }
+        );
+
+    });
 
     this.listeSpeakers.forEach(
       intervenant => {

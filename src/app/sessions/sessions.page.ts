@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../service/data-service';
-import { infosSessions } from '../entities/infosSessions';
-import { speakers } from '../entities/speakers';
+import { InfosSessions } from '../entities/infosSessions';
+import { Speakers } from '../entities/speakers';
 
 
 @Component({
@@ -12,54 +12,26 @@ import { speakers } from '../entities/speakers';
 export class SessionsPage implements OnInit {
 
 
-  session: infosSessions = new infosSessions(null, '', '', '', []);
+  listeSession: InfosSessions[] = [];
 
-  listeSession: infosSessions[] = [];
+  listeSpeakers: Speakers[] = [];
 
-  listeSpeakers: speakers[] = [];
-
-  listeSpeakersSession: speakers[] = [];
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
 
-    if (localStorage.getItem('session') === null) {
-      this.dataService.recupererInfosSessions()
-        .subscribe(
-          info => {
-            Object.values(info).forEach(
-              result => {
-                if (result.titleMobile != null) {
-                  result.title = result.titleMobile;
-                }
-                this.listeSession.push(result);
-              }
-            );
-            localStorage.setItem('session', JSON.stringify(this.listeSession));
-          }
-        );
 
-    } else {
-      this.listeSession = JSON.parse(localStorage.getItem('session'));
-    }
+    this.dataService.recupererInfosSessions()
+      .subscribe(
+        result => { this.listeSession = result; }
+      );
 
-    if (localStorage.getItem('speaker') === null) {
-      this.dataService.recupererInfosSpeakers()
-        .subscribe(
-          info => {
-            Object.values(info).forEach(
-              result => {
-                this.listeSpeakers.push(result)
-              }
-            );
-            localStorage.setItem('speaker', JSON.stringify(this.listeSpeakers));
-          }
-        );
+    this.dataService.recupererInfosSpeakers()
+      .subscribe(
+        result => { this.listeSpeakers = result; }
+      );
 
-    } else {
-      this.listeSpeakers = JSON.parse(localStorage.getItem('speaker'));
-    }
   }
 
 }
