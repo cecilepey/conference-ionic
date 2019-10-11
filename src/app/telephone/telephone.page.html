@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Téléphone
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-card class="ion-padding-bottom">
+    <ion-item>
+      <ion-label>Platforme : {{telephone.platform}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Version : {{telephone.osVersion}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>UUID : {{telephone.uuid}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Modèle : {{telephone.model}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>connexion : {{connexion.connectionType}}</ion-label>
+    </ion-item>
+  </ion-card>
+</ion-content>

@@ -22,6 +22,10 @@ export class AppComponent {
     {
       title: 'Présentateurs',
       url: '/presentateurs'
+    },
+    {
+      title: 'Téléphone',
+      url: '/telephone'
     }
   ];
 

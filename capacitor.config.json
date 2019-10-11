@@ -1,0 +1,7 @@
+{
+  "appId": "fr.conference.com",
+  "appName": "conference",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}

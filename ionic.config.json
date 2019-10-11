@@ -1,5 +1,8 @@
 {
   "name": "conference-ionic",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
   "type": "angular"
 }
