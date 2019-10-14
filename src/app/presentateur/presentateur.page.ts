@@ -3,6 +3,7 @@ import { Speakers } from '../entities/speakers';
 import { InfosSessions } from '../entities/infosSessions';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { DataService } from '../service/data-service';
+import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts/ngx';
 
 @Component({
   selector: 'app-presentateur',
@@ -20,7 +21,8 @@ export class PresentateurPage implements OnInit {
 
   listeSessionSpeaker: InfosSessions[] = [];
 
-  constructor(private route: ActivatedRoute, private dataService: DataService) {
+
+  constructor(private route: ActivatedRoute, private dataService: DataService, private contacts: Contacts) {
     this.id = route.snapshot.paramMap.get("id");
   }
 
@@ -70,6 +72,25 @@ export class PresentateurPage implements OnInit {
       }
     );
 
+  }
+
+  creerContact() {
+
+    const nomPrenom = this.speaker.name.split(' ');
+
+    const nom = nomPrenom[1];
+    const prenom = nomPrenom[0];
+
+    let contact = this.contacts.create();
+
+    contact.name = new ContactName(null, nom, prenom);
+
+    console.log(contact);
+    contact.save().then(
+      () => console.log('Contact saved!', contact),
+      (error: any) => console.error('Error saving contact.', error)
+    );
+    console.log('aurevoir...');
   }
 
 }

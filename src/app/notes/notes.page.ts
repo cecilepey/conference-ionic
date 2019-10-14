@@ -3,6 +3,10 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { DataService } from '../service/data-service';
 import { InfosSessions } from '../entities/infosSessions';
 import { Note } from '../entities/note';
+import { Plugins, CameraResultType, CameraPhoto, CameraSource } from '@capacitor/core';
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+
+const { Camera } = Plugins;
 
 @Component({
   selector: 'app-notes',
@@ -11,12 +15,17 @@ import { Note } from '../entities/note';
 })
 export class NotesPage implements OnInit {
 
+
   id: string;
   listeSession: InfosSessions[] = [];
 
   session = new InfosSessions(null, '', '', '', []);
 
-  note = new Note(null, '');
+  note = new Note(null, ' ');
+
+  listePhoto: string[] = [];
+
+
 
   constructor(private route: ActivatedRoute, private dataService: DataService) {
     this.id = route.snapshot.paramMap.get("id");
@@ -41,8 +50,9 @@ export class NotesPage implements OnInit {
           this.session = result;
           if (localStorage.getItem(`${this.session.id}`) != null) {
             this.note.contenu = localStorage.getItem(`${this.session.id}`)
-          } else {
-            this.note.contenu = 'Saisissez vos notes...';
+          }
+          if (localStorage.getItem(`photo${this.session.id}`) != null) {
+            this.listePhoto = JSON.parse(localStorage.getItem(`photo${this.session.id}`));
           }
         }
       }
@@ -57,4 +67,42 @@ export class NotesPage implements OnInit {
     localStorage.setItem(`${this.note.idSession}`, this.note.contenu);
   }
 
+  async prendrePhoto() {
+    const image = await Plugins.Camera.getPhoto({
+      quality: 100,
+      allowEditing: false,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Camera
+    });
+    const imageUrl = image.base64String;
+
+    const cheminImage = 'data:image/png;base64,' + imageUrl;
+
+    this.listePhoto.push(cheminImage);
+
+    localStorage.setItem(`photo${this.session.id}`, JSON.stringify(this.listePhoto));
+
+
+  }
+
+  async choisirPhoto() {
+
+    const image = await Plugins.Camera.getPhoto({
+      quality: 100,
+      allowEditing: false,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Photos
+    });
+
+    const imageUrl = image.base64String;
+
+    const cheminImage = 'data:image/png;base64,' + imageUrl;
+
+    this.listePhoto.push(cheminImage);
+
+    localStorage.setItem(`photo${this.session.id}`, JSON.stringify(this.listePhoto));
+
+  }
+
 }
+

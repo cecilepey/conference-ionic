@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">conference</string>
+    <string name="title_activity_main">conference</string>
+    <string name="package_name">fr.conference.com</string>
+    <string name="fileprovider_authority">fr.conference.com.fileprovider</string>
+    <string name="custom_url_scheme">fr.conference.com</string>
+</resources>
